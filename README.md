@@ -108,3 +108,13 @@ php artisan db:seed
 5. ▶️ Start the Application
 
 php artisan serve
+
+Normal user login 
+
+id : user@sigma.world
+password : password
+
+Finance user login
+
+id : finance@sigma.world
+password : password
