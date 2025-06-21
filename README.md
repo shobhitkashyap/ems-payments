@@ -1,66 +1,73 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# EMS Advanced Developer Challenge: Event Payment Management Feature
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This Laravel 11 project implements a full-featured Event Payment Management system for the finance team, enabling management of payment methods for each event and linking these to companies, including VAT settings and new provider request workflows.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Role-based access for Finance users
+- Assign payment methods, VAT rates, and companies to events
+- Request implementation of new payment providers
+- View and update status of payment provider requests (approve/reject)
+- RESTful API to expose relevant data
+<!-- - Email notifications for configuration updates and request status changes -->
+- Clean UI using Bootstrap and AJAX
+- Unit and Feature tests for key workflows
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 📁 Project Structure & Flow
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 1. Models
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **Event**: name, location, date, description
+- **PaymentMethod**: name, type, website
+- **Company**: name, bank_account, vat_rate
+- **EventPayment**: event ↔ payment method ↔ company + vat_rate
+- **PaymentProviderRequest**: new provider request with status tracking
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 2. Controllers
 
-## Laravel Sponsors
+#### 🔹 FinanceController
+- `index()` – Finance Dashboard
+- `editPayment($eventId)` – Show assignment form
+- `updatePayment(Request $request)` – Save event payment config
+- `requestPaymentProvider()` – Show provider request form
+- `storePaymentProviderRequest()` – Handle new provider request
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+#### 🔹 EventPaymentController
+- `store()` – Create event payment configuration
+- `update()` – Update event payment configuration
 
-### Premium Partners
+#### 🔹 PaymentProviderRequestController
+- `store()` – Submit new provider request
+- `updateStatus()` – Approve/Reject requests
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+---
 
-## Contributing
+### 3. API Endpoints
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+| Endpoint                         | Method | Description                                  |
+|----------------------------------|--------|----------------------------------------------|
+| `/api/events`                   | GET    | List events with payment configs             |
+| `/api/payment-methods`         | GET    | List all payment methods                     |
+| `/api/companies`               | GET    | List all companies                           |
+| `/api/payment-provider-requests` | GET  | List provider requests with statuses         |
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+<!-- ### 4. Email Notifications
 
-## Security Vulnerabilities
+- Sent to finance team upon successful configuration
+- Sent to relevant users on provider request submission and status updates
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+--- -->
 
-## License
+## 🛠️ Setup Instructions
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1. **Clone the repository**
+
+   ```bash
+   git clone git@github.com:shobhitkashyap/ems-payments.git
+   cd ems-payments
