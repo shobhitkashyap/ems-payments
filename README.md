@@ -1,108 +1,119 @@
-# EMS Advanced Developer Challenge: Event Payment Management Feature
+# 📦 EMS Advanced Developer Challenge: Event Payment Management Feature
 
-This Laravel 11 project implements a full-featured Event Payment Management system for the finance team, enabling management of payment methods for each event and linking these to companies, including VAT settings and new provider request workflows.
+This Laravel 11 project implements a complete **Event Payment Management System** for the finance team. It allows assigning payment methods, VAT rates, and companies to events, along with the ability to request new payment providers and manage their approval workflow.
 
 ---
 
 ## 🚀 Features
 
-- Role-based access for Finance users
-- Assign payment methods, VAT rates, and companies to events
-- Request implementation of new payment providers
-- View and update status of payment provider requests (approve/reject)
-- RESTful API to expose relevant data
-<!-- - Email notifications for configuration updates and request status changes -->
-- Clean UI using Bootstrap and AJAX
-- Unit and Feature tests for key workflows
+- 🔐 Role-based access control (Finance users only)
+- 🏦 Assign payment methods, VAT rates, and link companies per event
+- 🧾 Request new payment providers with approval flow
+- 🔁 Approve/Reject provider requests
+- 🌐 RESTful API for events, payments, and providers
+<!-- - 📧 Email notifications for configurations and requests -->
+- 🎨 Clean UI with Bootstrap and AJAX interactions
+- ✅ Unit and Feature tests for critical flows
 
 ---
 
-## 📁 Project Structure & Flow
+## 🧩 Project Structure
 
-### 1. Models
+### 📄 Models
 
-- **Event**: name, location, date, description
-- **PaymentMethod**: name, type, website
-- **Company**: name, bank_account, vat_rate
-- **EventPayment**: event ↔ payment method ↔ company + vat_rate
-- **PaymentProviderRequest**: new provider request with status tracking
+- **Event** – name, location (enum), date, description
+- **PaymentMethod** – name (enum), type (enum), website
+- **Company** – name (enum), bank_account, vat_rate
+- **EventPayment** – links event ↔ payment_method ↔ company with VAT
+- **PaymentProviderRequest** – captures provider name, site, event, company, and request status
 
-### 2. Controllers
+### 📂 Controllers
 
-#### 🔹 FinanceController
-- `index()` – Finance Dashboard
-- `editPayment($eventId)` – Show assignment form
-- `updatePayment(Request $request)` – Save event payment config
-- `requestPaymentProvider()` – Show provider request form
-- `storePaymentProviderRequest()` – Handle new provider request
+#### `FinanceController`
+- `index()` – Show finance dashboard with event list
+- `editPayment($eventId)` – Form to manage event payments
+- `updatePayment(Request $request)` – Save assignments
+- `requestPaymentProvider()` – Show new provider request form
+- `storePaymentProviderRequest()` – Submit request
 
-#### 🔹 EventPaymentController
-- `store()` – Create event payment configuration
-- `update()` – Update event payment configuration
+#### `EventPaymentController`
+- `store()` – Add payment config to an event
+- `update()` – Update existing payment config
 
-#### 🔹 PaymentProviderRequestController
-- `store()` – Submit new provider request
-- `updateStatus()` – Approve/Reject requests
-
----
-
-### 3. API Endpoints
-
-| Endpoint                         | Method | Description                                  |
-|----------------------------------|--------|----------------------------------------------|
-| `/api/events`                   | GET    | List events with payment configs             |
-| `/api/payment-methods`         | GET    | List all payment methods                     |
-| `/api/companies`               | GET    | List all companies                           |
-| `/api/payment-provider-requests` | GET  | List provider requests with statuses         |
+#### `PaymentProviderRequestController`
+- `store()` – Submit a new provider request
+- `updateStatus()` – Approve or reject requests
 
 ---
 
-<!-- ### 4. Email Notifications
+## 📡 API Endpoints
 
-- Sent to finance team upon successful configuration
-- Sent to relevant users on provider request submission and status updates
-
---- -->
-
-### 4. Setup Instructions
-
-1. **Clone the repository**
-
-   ```bash
-   git clone git@github.com:shobhitkashyap/ems-payments.git
-   cd ems-payments
+| Endpoint                           | Method | Description                              |
+|------------------------------------|--------|------------------------------------------|
+| `/api/events`                      | GET    | List events with payment configurations  |
+| `/api/payment-methods`            | GET    | List of available payment methods        |
+| `/api/companies`                  | GET    | List of companies                        |
+| `/api/payment-provider-requests` | GET    | List of provider requests with status    |
 
 ---
 
-### 5. Install dependencies
+<!-- 
+## 📬 Email Notifications
 
+- Email sent upon successful payment setup
+- Email sent when a provider request is submitted or its status changes
+ -->
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1. 📥 Clone the repository
+
+```bash
+git clone git@github.com:shobhitkashyap/ems-payments.git
+cd ems-payments
+---
+
+2. 🧰 Install Dependencies
+Install PHP and Laravel dependencies:
+
+bash
+Copy
+Edit
 composer install
 composer dumpautoload
 php artisan optimize:clear
+3. ⚙️ Configure Environment Variables
+Copy the example .env file:
 
----
-### 6. Set up environment variables
-
-Create .env file and define DB credentials:
+bash
+Copy
+Edit
 cp .env.example .env
+Then update the .env file with your database credentials:
 
-Edit .env and define
-
+ini
+Copy
+Edit
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=your_database
 DB_USERNAME=your_username
 DB_PASSWORD=your_password
+4. 🗄️ Run Database Migrations and Seeders
+Run the following to migrate the database and seed initial data:
 
----
-
-### 7. Run migrations and seeders
+bash
+Copy
+Edit
 php artisan migrate
 php artisan db:seed
+5. ▶️ Start the Application
+Serve the Laravel application locally:
 
----
-
-### 8. Start the application
-
+bash
+Copy
+Edit
 php artisan serve
