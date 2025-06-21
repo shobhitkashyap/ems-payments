@@ -64,7 +64,7 @@ This Laravel 11 project implements a full-featured Event Payment Management syst
 
 --- -->
 
-## 🛠️ Setup Instructions
+### 4. Setup Instructions
 
 1. **Clone the repository**
 
@@ -74,14 +74,14 @@ This Laravel 11 project implements a full-featured Event Payment Management syst
 
 ---
 
-## 🛠️ Install dependencies
+### 5. Install dependencies
 
 composer install
 composer dumpautoload
 php artisan optimize:clear
 
 ---
-## 🛠️ Set up environment variables
+### 6. Set up environment variables
 
 Create .env file and define DB credentials:
 cp .env.example .env
@@ -97,12 +97,12 @@ DB_PASSWORD=your_password
 
 ---
 
-## 🛠️ Run migrations and seeders
+### 7. Run migrations and seeders
 php artisan migrate
 php artisan db:seed
 
 ---
 
-## 🛠️ Start the application
+### 8. Start the application
 
 php artisan serve
