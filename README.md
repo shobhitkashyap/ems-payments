@@ -71,3 +71,38 @@ This Laravel 11 project implements a full-featured Event Payment Management syst
    ```bash
    git clone git@github.com:shobhitkashyap/ems-payments.git
    cd ems-payments
+
+---
+
+## 🛠️ Install dependencies
+
+composer install
+composer dumpautoload
+php artisan optimize:clear
+
+---
+## 🛠️ Set up environment variables
+
+Create .env file and define DB credentials:
+cp .env.example .env
+
+Edit .env and define
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_database
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+
+---
+
+## 🛠️ Run migrations and seeders
+php artisan migrate
+php artisan db:seed
+
+---
+
+## 🛠️ Start the application
+
+php artisan serve
