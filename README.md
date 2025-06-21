@@ -78,42 +78,27 @@ cd ems-payments
 2. 🧰 Install Dependencies
 Install PHP and Laravel dependencies:
 
-bash
-Copy
-Edit
-composer install
-composer dumpautoload
-php artisan optimize:clear
+    composer install
+    composer dumpautoload
+    php artisan optimize:clear
+
 3. ⚙️ Configure Environment Variables
-Copy the example .env file:
 
-bash
-Copy
-Edit
 cp .env.example .env
-Then update the .env file with your database credentials:
 
-ini
-Copy
-Edit
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=your_database
 DB_USERNAME=your_username
 DB_PASSWORD=your_password
+
 4. 🗄️ Run Database Migrations and Seeders
 Run the following to migrate the database and seed initial data:
 
-bash
-Copy
-Edit
 php artisan migrate
 php artisan db:seed
-5. ▶️ Start the Application
-Serve the Laravel application locally:
 
-bash
-Copy
-Edit
+5. ▶️ Start the Application
+
 php artisan serve
